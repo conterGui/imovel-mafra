@@ -1,8 +1,8 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { propertyConfig } from '@/config/property';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useRef, useCallback } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { propertyConfig } from "@/config/property";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ComparisonSliderProps {
   before: string;
@@ -12,12 +12,12 @@ interface ComparisonSliderProps {
   afterLabel: string;
 }
 
-const ComparisonSlider: React.FC<ComparisonSliderProps> = ({ 
-  before, 
-  after, 
+const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
+  before,
+  after,
   label,
   beforeLabel,
-  afterLabel 
+  afterLabel,
 }) => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -25,7 +25,7 @@ const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
 
   const handleMove = useCallback((clientX: number) => {
     if (!containerRef.current || !isDragging.current) return;
-    
+
     const rect = containerRef.current.getBoundingClientRect();
     const x = clientX - rect.left;
     const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
@@ -50,10 +50,8 @@ const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
 
   return (
     <div className="space-y-4">
-      {label && (
-        <h3 className="heading-secondary text-center">{label}</h3>
-      )}
-      
+      {label && <h3 className="heading-secondary text-center">{label}</h3>}
+
       <div
         ref={containerRef}
         className="relative aspect-video cursor-ew-resize select-none overflow-hidden rounded-lg"
@@ -82,7 +80,10 @@ const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
             src={before}
             alt="Before"
             className="absolute inset-0 w-full h-full object-cover"
-            style={{ width: `${100 / (sliderPosition / 100)}%`, maxWidth: 'none' }}
+            style={{
+              width: `${100 / (sliderPosition / 100)}%`,
+              maxWidth: "none",
+            }}
             draggable={false}
           />
         </div>
@@ -90,7 +91,7 @@ const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
         {/* Slider line */}
         <div
           className="absolute top-0 bottom-0 w-0.5 bg-primary shadow-lg"
-          style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
+          style={{ left: `${sliderPosition}%`, transform: "translateX(-50%)" }}
         >
           {/* Handle */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-primary rounded-full flex items-center justify-center shadow-lg">
@@ -122,35 +123,35 @@ const BeforeAfterSection: React.FC = () => {
   if (!comparisons || comparisons.length === 0) return null;
 
   const goToPrevious = () => {
-    setCurrentIndex(prev => prev === 0 ? comparisons.length - 1 : prev - 1);
+    setCurrentIndex((prev) => (prev === 0 ? comparisons.length - 1 : prev - 1));
   };
 
   const goToNext = () => {
-    setCurrentIndex(prev => prev === comparisons.length - 1 ? 0 : prev + 1);
+    setCurrentIndex((prev) => (prev === comparisons.length - 1 ? 0 : prev + 1));
   };
 
   return (
-    <section 
-      id="before-after" 
+    <section
+      id="before-after"
       ref={ref as React.RefObject<HTMLElement>}
       className="section-padding bg-background"
     >
       <div className="container-wide">
         {/* Gold accent line */}
         <div className="w-12 h-0.5 bg-primary mb-8" />
-        
-        <h2 
+
+        <h2
           className={`heading-primary mb-16 transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
           }`}
         >
           {t.beforeAfter.title}
         </h2>
 
         {/* Carousel */}
-        <div 
+        <div
           className={`relative transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
           {/* Main comparison slider */}
@@ -158,7 +159,7 @@ const BeforeAfterSection: React.FC = () => {
             <ComparisonSlider
               before={comparisons[currentIndex].before}
               after={comparisons[currentIndex].after}
-              label={comparisons[currentIndex].label}
+              label={t.beforeAfter.rooms[comparisons[currentIndex].label]} // ✅ tradução aqui
               beforeLabel={t.beforeAfter.before}
               afterLabel={t.beforeAfter.after}
             />
@@ -192,9 +193,9 @@ const BeforeAfterSection: React.FC = () => {
                   key={index}
                   onClick={() => setCurrentIndex(index)}
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === currentIndex 
-                      ? 'bg-primary w-6' 
-                      : 'bg-charcoal/30 hover:bg-charcoal/50'
+                    index === currentIndex
+                      ? "bg-primary w-6"
+                      : "bg-charcoal/30 hover:bg-charcoal/50"
                   }`}
                   aria-label={`Ir para ${comparisons[index].label}`}
                 />
@@ -210,9 +211,9 @@ const BeforeAfterSection: React.FC = () => {
                   key={index}
                   onClick={() => setCurrentIndex(index)}
                   className={`flex-shrink-0 transition-all duration-300 ${
-                    index === currentIndex 
-                      ? 'ring-2 ring-primary ring-offset-2' 
-                      : 'opacity-60 hover:opacity-100'
+                    index === currentIndex
+                      ? "ring-2 ring-primary ring-offset-2"
+                      : "opacity-60 hover:opacity-100"
                   }`}
                 >
                   <img

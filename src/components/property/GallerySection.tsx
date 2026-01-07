@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { propertyConfig } from '@/config/property';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { propertyConfig } from "@/config/property";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const GallerySection: React.FC = () => {
   const { t } = useLanguage();
@@ -12,16 +12,20 @@ const GallerySection: React.FC = () => {
 
   const openLightbox = (index: number) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);
-  
+
   const goToPrevious = () => {
     if (lightboxIndex !== null) {
-      setLightboxIndex(lightboxIndex === 0 ? images.length - 1 : lightboxIndex - 1);
+      setLightboxIndex(
+        lightboxIndex === 0 ? images.length - 1 : lightboxIndex - 1
+      );
     }
   };
-  
+
   const goToNext = () => {
     if (lightboxIndex !== null) {
-      setLightboxIndex(lightboxIndex === images.length - 1 ? 0 : lightboxIndex + 1);
+      setLightboxIndex(
+        lightboxIndex === images.length - 1 ? 0 : lightboxIndex + 1
+      );
     }
   };
 
@@ -29,41 +33,41 @@ const GallerySection: React.FC = () => {
   const getImageStyle = (index: number) => {
     // Create visual variety with different sizes
     const patterns = [
-      'col-span-2 row-span-2', // Large featured
-      'col-span-1 row-span-1', // Small square
-      'col-span-1 row-span-2', // Tall
-      'col-span-1 row-span-1', // Small square
-      'col-span-2 row-span-1', // Wide
-      'col-span-1 row-span-1', // Small square
+      "col-span-2 row-span-2", // Large featured
+      "col-span-1 row-span-1", // Small square
+      "col-span-1 row-span-2", // Tall
+      "col-span-1 row-span-1", // Small square
+      "col-span-2 row-span-1", // Wide
+      "col-span-1 row-span-1", // Small square
     ];
     return patterns[index % patterns.length];
   };
 
   const getAspectRatio = (index: number) => {
     const patterns = [
-      'aspect-square',     // Large featured - square
-      'aspect-square',     // Small square
-      'aspect-[3/4]',      // Tall
-      'aspect-square',     // Small square
-      'aspect-video',      // Wide
-      'aspect-square',     // Small square
+      "aspect-square", // Large featured - square
+      "aspect-square", // Small square
+      "aspect-[3/4]", // Tall
+      "aspect-square", // Small square
+      "aspect-video", // Wide
+      "aspect-square", // Small square
     ];
     return patterns[index % patterns.length];
   };
 
   return (
-    <section 
-      id="gallery" 
+    <section
+      id="gallery"
       ref={ref as React.RefObject<HTMLElement>}
       className="section-padding bg-warm-white"
     >
       <div className="container-wide">
         {/* Gold accent line */}
         <div className="w-12 h-0.5 bg-primary mb-8" />
-        
-        <h2 
+
+        <h2
           className={`heading-primary mb-16 transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
           }`}
         >
           {t.gallery.title}
@@ -74,8 +78,12 @@ const GallerySection: React.FC = () => {
           {images.map((image, index) => (
             <div
               key={index}
-              className={`${getImageStyle(index)} image-zoom cursor-pointer transition-all duration-700 group ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              className={`${getImageStyle(
+                index
+              )} image-zoom cursor-pointer transition-all duration-700 group ${
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
               onClick={() => openLightbox(index)}
@@ -86,8 +94,6 @@ const GallerySection: React.FC = () => {
                   alt={`Gallery ${index + 1}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                {/* Gold hover overlay */}
-                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300" />
               </div>
             </div>
           ))}
@@ -96,27 +102,33 @@ const GallerySection: React.FC = () => {
 
       {/* Lightbox */}
       {lightboxIndex !== null && (
-        <div 
+        <div
           className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
           onClick={closeLightbox}
         >
-          <button 
+          <button
             className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
             onClick={closeLightbox}
           >
             <X className="w-8 h-8" />
           </button>
-          
-          <button 
+
+          <button
             className="absolute left-6 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors"
-            onClick={(e) => { e.stopPropagation(); goToPrevious(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              goToPrevious();
+            }}
           >
             <ChevronLeft className="w-10 h-10" />
           </button>
-          
-          <button 
+
+          <button
             className="absolute right-6 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors"
-            onClick={(e) => { e.stopPropagation(); goToNext(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              goToNext();
+            }}
           >
             <ChevronRight className="w-10 h-10" />
           </button>

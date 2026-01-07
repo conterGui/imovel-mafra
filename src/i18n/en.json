@@ -21,6 +21,11 @@
     "title": "Features",
     "price": "Price",
     "area": "Area",
+    "totalArea": "Total Area",
+    "yearsBuilt": "Year Built",
+    "lot": "Lot Size",
+    "condition": "Condition",
+    "energyRating": "Energy Certificate",
     "bedrooms": "Bedrooms",
     "bathrooms": "Bathrooms",
     "parking": "Parking",
@@ -32,7 +37,13 @@
   "beforeAfter": {
     "title": "Transformation",
     "before": "Before",
-    "after": "After"
+    "after": "After",
+      "rooms":{
+        "bedroom": "Bedroom",
+        "bathroom": "Bathroom",
+        "livingRoom": "Living Room",
+        "kitchen": "Kitchen"
+      }
   },
   "video": {
     "title": "Virtual Tour"
@@ -62,7 +73,9 @@
     },
     "whatsapp": "WhatsApp",
     "call": "Call Now",
-    "schedule": "Call to Schedule Visit"
+    "schedule": "Call to Schedule Visit",
+    "brochure": "Brochure",
+    "available": "WhatsApp Available"
   },
   "footer": {
     "rights": "All rights reserved"

@@ -11,6 +11,9 @@ import gallery3 from '@/assets/gallery-3.jpg';
 import gallery4 from '@/assets/gallery-4.jpg';
 import gallery5 from '@/assets/gallery-5.jpg';
 import gallery6 from '@/assets/gallery-6.jpg';
+import gallery7 from '@/assets/gallery-7.jpg';
+import gallery8 from '@/assets/gallery-8.jpg';
+import agentPhoto from '@/assets/agent-photo.jpg';
 import beforeLiving from '@/assets/before-living.jpg';
 import afterLiving from '@/assets/after-living.jpg';
 import beforeKitchen from '@/assets/before-kitchen.jpg';
@@ -24,9 +27,14 @@ export const propertyConfig = {
   // Informações básicas
   price: "R$ 2.850.000",
   area: 450,
+  totalArea: 550,
   bedrooms: 4,
   bathrooms: 5,
   parking: 3,
+  yearBuilt: 2020,
+  lotSize: 600,
+  condition: "Renovado",
+  energyRating: "A+",
 
   // Contato
   whatsapp: "5511999999999", // Número com código do país, sem símbolos
@@ -43,6 +51,14 @@ export const propertyConfig = {
     { name: "Metro Odivelas", distance: "10 min" },
     { name: "Hospital Beatriz Ângelo", distance: "5 min" },
   ],
+
+  // Agente imobiliário
+  seller:{
+    photo: agentPhoto, // URL ou caminho para a foto do agente
+    name: "João Silva",
+    agency: "Imobiliária Exemplo",
+  },
+
 
   // Seções ativas (true = visível, false = oculto)
   sections: {
@@ -64,27 +80,29 @@ export const propertyConfig = {
     gallery4,
     gallery5,
     gallery6,
+    gallery7,
+    gallery8,
   ],
 
   // Before/After comparisons - Um para cada cômodo
   beforeAfter: [
     {
-      label: "Sala de Estar",
+      label: "livingRoom",
       before: beforeLiving,
       after: afterLiving,
     },
     {
-      label: "Cozinha",
+      label: "kitchen",
       before: beforeKitchen,
       after: afterKitchen,
     },
     {
-      label: "Quarto Principal",
+      label: "bedroom",
       before: beforeBedroom,
       after: afterBedroom,
     },
     {
-      label: "Casa de Banho",
+      label: "bathroom",
       before: beforeBathroom,
       after: afterBathroom,
     },

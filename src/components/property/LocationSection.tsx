@@ -1,90 +1,49 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { propertyConfig } from '@/config/property';
-import { MapPin, Navigation } from 'lucide-react';
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import React from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { propertyConfig } from "@/config/property";
+import { MapPin, Navigation } from "lucide-react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L, { LatLngExpression } from "leaflet";
+import "leaflet/dist/leaflet.css";
+
+// ícone customizado do marker
+const customIcon = new L.Icon({
+  iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
+  iconSize: [32, 32],
+  iconAnchor: [16, 32],
+  popupAnchor: [0, -32],
+});
 
 const LocationSection: React.FC = () => {
   const { t } = useLanguage();
   const { ref, isVisible } = useScrollAnimation();
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<mapboxgl.Map | null>(null);
-  const [mapboxToken, setMapboxToken] = useState('');
-  const [showTokenInput, setShowTokenInput] = useState(true);
+  const position: LatLngExpression = [38.8308, -9.1705];
 
   const openMaps = () => {
     const { lat, lng } = propertyConfig.mapCenter;
-    window.open(`https://www.google.com/maps?q=${lat},${lng}`, '_blank');
-  };
-
-  useEffect(() => {
-    if (!mapContainer.current || !mapboxToken) return;
-
-    try {
-      mapboxgl.accessToken = mapboxToken;
-      
-      map.current = new mapboxgl.Map({
-        container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/light-v11',
-        center: [propertyConfig.mapCenter.lng, propertyConfig.mapCenter.lat],
-        zoom: 15,
-        pitch: 45,
-      });
-
-      // Add navigation controls
-      map.current.addControl(
-        new mapboxgl.NavigationControl({
-          visualizePitch: true,
-        }),
-        'top-right'
-      );
-
-      // Add marker with gold color
-      new mapboxgl.Marker({ color: '#C9A227' })
-        .setLngLat([propertyConfig.mapCenter.lng, propertyConfig.mapCenter.lat])
-        .addTo(map.current);
-
-      setShowTokenInput(false);
-    } catch (error) {
-      console.error('Error initializing map:', error);
-    }
-
-    return () => {
-      map.current?.remove();
-    };
-  }, [mapboxToken]);
-
-  const handleTokenSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const input = (e.target as HTMLFormElement).querySelector('input');
-    if (input?.value) {
-      setMapboxToken(input.value);
-    }
+    window.open(`https://www.google.com/maps?q=${lat},${lng}`, "_blank");
   };
 
   return (
-    <section 
-      id="location" 
+    <section
+      id="location"
       ref={ref as React.RefObject<HTMLElement>}
       className="section-padding bg-warm-white"
     >
       <div className="container-wide">
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Info */}
-          <div 
+          <div
             className={`transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-12"
             }`}
           >
-            {/* Gold accent line */}
             <div className="w-12 h-0.5 bg-primary mb-8" />
-            
-            <h2 className="heading-primary mb-8">
-              {t.location.title}
-            </h2>
 
+            <h2 className="heading-primary mb-8">{t.location.title}</h2>
             <p className="body-large text-muted-foreground mb-8">
               {t.location.description}
             </p>
@@ -116,45 +75,28 @@ const LocationSection: React.FC = () => {
           </div>
 
           {/* Map */}
-          <div 
+          <div
             className={`transition-all duration-700 delay-200 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
             }`}
           >
-            {showTokenInput ? (
-              <div className="aspect-square bg-charcoal rounded-lg flex items-center justify-center p-8">
-                <div className="text-center max-w-sm">
-                  <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
-                  <p className="text-sm text-warm-white/60 mb-4">
-                    Para ver o mapa interativo, insira seu token público do Mapbox
-                  </p>
-                  <form onSubmit={handleTokenSubmit} className="space-y-3">
-                    <input
-                      type="text"
-                      placeholder="pk.eyJ1Ijoi..."
-                      className="w-full px-4 py-3 bg-charcoal-light border border-warm-white/20 rounded text-warm-white text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-                    />
-                    <button
-                      type="submit"
-                      className="w-full btn-primary"
-                    >
-                      Carregar Mapa
-                    </button>
-                  </form>
-                  <button 
-                    onClick={openMaps}
-                    className="mt-4 text-sm text-primary hover:text-gold-light transition-colors"
-                  >
-                    Ou abrir no Google Maps →
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div 
-                ref={mapContainer}
-                className="aspect-square rounded-lg overflow-hidden shadow-lg"
+            <MapContainer
+              center={position}
+              zoom={15}
+              scrollWheelZoom={false}
+              className="w-full h-96 rounded-lg"
+            >
+              <TileLayer
+                url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                attribution='&copy; <a href="https://www.carto.com/">CARTO</a> &copy; OpenStreetMap'
               />
-            )}
+
+              <Marker position={position} icon={customIcon}>
+                <Popup>Endereço do imóvel</Popup>
+              </Marker>
+            </MapContainer>
           </div>
         </div>
       </div>

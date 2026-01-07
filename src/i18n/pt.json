@@ -20,7 +20,12 @@
   "details": {
     "title": "Características",
     "price": "Preço",
-    "area": "Área",
+    "area": "Área Útil",
+    "totalArea": "Área Bruta",
+    "yearsBuilt": "Ano de Construção",
+    "lot": "Area Terreno",
+    "condition": "Condição",
+    "energyRating": "Certificado Energética",
     "bedrooms": "Quartos",
     "bathrooms": "Banheiros",
     "parking": "Vagas",
@@ -32,7 +37,13 @@
   "beforeAfter": {
     "title": "Transformação",
     "before": "Antes",
-    "after": "Depois"
+    "after": "Depois",
+      "rooms":{
+        "livingRoom": "Sala de Estar",
+        "kitchen": "Cozinha",
+        "bedroom": "Quarto Principal",
+        "bathroom": "Casa de Banho"
+      }
   },
   "video": {
     "title": "Tour Virtual"
@@ -62,7 +73,9 @@
     },
     "whatsapp": "WhatsApp",
     "call": "Ligar Agora",
-    "schedule": "Ligar para Agendar Visita"
+    "brochure": "Brochura",
+    "schedule": "Ligar para Agendar Visita",
+    "available": "WhatsApp Disponível"
   },
   "footer": {
     "rights": "Todos os direitos reservados"

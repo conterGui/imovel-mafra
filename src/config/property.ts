@@ -5,8 +5,8 @@
 
 // Imagens importadas como ES6 modules
 import agentPhoto from '@/assets/agent-photo.jpg';
-import { galleryImages } from "@/assets/propertyImages";
-import { propertyImages } from '@/assets/propertyImages';
+import { propertyImages, beforeAfterImages} from '@/assets/propertyImages';
+
 
 export const propertyConfig = {
   // Informações básicas
@@ -27,8 +27,9 @@ export const propertyConfig = {
   email: "sandrasemedo@century21.pt",
 
   // Localização - Loures Shopping, Loures, Lisboa, Portugal
-  address: "Av. Liberdade 41, 2674-501 Loures, Portugal",
-  mapCenter: { lat: 38.8308, lng: -9.1705 },
+  address: "Estr. da Chança 6, 2640-601 Sobral da Abelheira",
+  mapCenter: { lat: 38.980889, lng: -9.30825 },
+
   
   // Pontos de interesse (para o mapa)
   pointsOfInterest: [
@@ -61,28 +62,23 @@ export const propertyConfig = {
   gallery: propertyImages.gallery,
 
   // Before/After comparisons - Um para cada cômodo
-  /*beforeAfter: [
+  beforeAfter: [
     {
-      label: "livingRoom",
-      before: beforeLiving,
-      after: afterLiving,
+      label: propertyImages.beforeAfter[0].label,
+      before: propertyImages.beforeAfter[0].before,
+      after: propertyImages.beforeAfter[0].after,
     },
     {
-      label: "kitchen",
-      before: beforeKitchen,
-      after: afterKitchen,
+      label: propertyImages.beforeAfter[1].label,
+      before: propertyImages.beforeAfter[1].before,
+      after: propertyImages.beforeAfter[1].after,
     },
     {
-      label: "bedroom",
-      before: beforeBedroom,
-      after: afterBedroom,
+      label: propertyImages.beforeAfter[2].label,
+      before: propertyImages.beforeAfter[2].before,
+      after: propertyImages.beforeAfter[2].after,
     },
-    {
-      label: "bathroom",
-      before: beforeBathroom,
-      after: afterBathroom,
-    },
-  ],*/
+  ],
 
   // Vídeos
   heroVideo: "", // URL do vídeo do hero (deixe vazio para usar imagem)

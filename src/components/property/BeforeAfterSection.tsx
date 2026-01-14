@@ -74,16 +74,15 @@ const ComparisonSlider: React.FC<ComparisonSliderProps> = ({
         {/* Before image (clipped) */}
         <div
           className="absolute inset-0 overflow-hidden"
-          style={{ width: `${sliderPosition}%` }}
+          style={{
+            clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
+            willChange: "clip-path",
+          }}
         >
           <img
             src={before}
             alt="Before"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{
-              width: `${100 / (sliderPosition / 100)}%`,
-              maxWidth: "none",
-            }}
+            className="w-full h-full object-cover"
             draggable={false}
           />
         </div>

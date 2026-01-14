@@ -12,8 +12,10 @@ import beforeKitchen from "@/assets/before/before-kitchen.jpg";
 import afterKitchen from "@/assets/after/after-kitchen.jpg";
 import beforeBedroom from "@/assets/before/before-bedroom.jpg";
 import afterBedroom from "@/assets/after/after-bedroom.jpg";
-import beforeBathroom from "@/assets/before/before-bathroom.jpg";
-import afterBathroom from "@/assets/after/after-bathroom.jpg";
+import afterYard from "@/assets/after/after-yard.jpg";
+import beforeYard from "@/assets/before/before-yard.jpg";
+import beforeGarage from "@/assets/before/before-garage.jpg";
+import afterGarage from "@/assets/after/after-garage.jpg";
 
 // DRONE
 import g1 from "@/assets/gallery/DJI_0688.jpg";
@@ -109,24 +111,20 @@ export const propertyImages: PropertyImages = {
 
   beforeAfter: [
     {
-      label: "livingRoom",
-      before: beforeLiving,
-      after: afterLiving,
+      label: "exterior",
+      before: beforeYard,
+      after: afterYard,
     },
     {
-      label: "kitchen",
-      before: beforeKitchen,
-      after: afterKitchen,
+      label: "garage",
+      before: beforeGarage,
+      after: afterGarage,
     },
+    
     {
       label: "bedroom",
       before: beforeBedroom,
       after: afterBedroom,
-    },
-    {
-      label: "bathroom",
-      before: beforeBathroom,
-      after: afterBathroom,
     },
   ],
 };

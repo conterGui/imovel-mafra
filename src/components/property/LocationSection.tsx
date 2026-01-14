@@ -18,7 +18,7 @@ const customIcon = new L.Icon({
 const LocationSection: React.FC = () => {
   const { t } = useLanguage();
   const { ref, isVisible } = useScrollAnimation();
-  const position: LatLngExpression = [38.8308, -9.1705];
+  const position: LatLngExpression = [38.980889, -9.30825];
 
   const openMaps = () => {
     const { lat, lng } = propertyConfig.mapCenter;

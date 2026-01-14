@@ -44,7 +44,8 @@
         "livingRoom": "Sala de Estar",
         "kitchen": "Cozinha",
         "bedroom": "Quarto Principal",
-        "bathroom": "Casa de Banho"
+        "bathroom": "Casa de Banho",
+        "exterior": "Exterior"
       }
   },
   "video": {
